@@ -1,0 +1,13 @@
+train: /Volumes/Picture_Crawling 1/yolov5-master/plaskat.v3i.yolov5pytorch/train/images
+val: /Volumes/Picture_Crawling 1/yolov5-master/plaskat.v3i.yolov5pytorch/valid/images
+test: /Volumes/Picture_Crawling 1/yolov5-master/plaskat.v3i.yolov5pytorch/test/images
+
+nc: 3
+names: ['Deformed Plastic', 'Plastic', 'deformed plastic']
+
+roboflow:
+  workspace: fyp-ctqte
+  project: plaskat
+  version: 3
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/fyp-ctqte/plaskat/dataset/3

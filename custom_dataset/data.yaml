@@ -1,0 +1,34 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+train: /Users/user/yolov5-master/custom_dataset/train/images
+val: /Users/user/yolov5-master/custom_dataset/valid/images
+test: /Users/user/yolov5-master/custom_dataset/test/images
+
+nc: 1
+names: ['Plastic']
+
+roboflow:
+  workspace: eunseok-yang-3kw7y
+  project: plastic-xzcj0
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/eunseok-yang-3kw7y/plastic-xzcj0/dataset/1
