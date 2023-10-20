@@ -2,28 +2,42 @@ import cv2
 import time
 import os
 import shutil
+from datetime import datetime
 
-# 웹캠 열기
-cap = cv2.VideoCapture(0)
 
-output_directory = "/Users/user/Desktop/Folder/yolov5-master/Direct/"
+output_directory = "/Users/user/Desktop/Folder/yolov5-master/Direct"
 
 shutil.rmtree(output_directory)
 os.mkdir(output_directory)
 
-try:
-    while True:
-        # 프레임 읽기
-        ret, frame = cap.read()
+webcam = cv2.VideoCapture(0)
 
-        timestamp = int(time.time())
-        file_name = f"{output_directory}capture_{timestamp}.png"
+start_time = time.time()
 
-        cv2.imshow('camera', frame)
-        cv2.imwrite(file_name, frame)
+if not webcam.isOpened():
+    print("Could not open webcam")
+    exit()
 
-        time.sleep(3)
+while webcam.isOpened():
+    status, frame = webcam.read()
 
-except KeyboardInterrupt:
-    cap.release()
-    cv2.destroyAllWindows()
+    if status:
+        folder_path = '/Users/user/Desktop/Folder/yolov5-master/Direct'
+        now = datetime.now()
+        now0 = now.strftime('%Y-%m-%d_%H-%M-%S')
+        cv2.imshow("test", frame)
+        cv2.imwrite(f"{folder_path}/{now0}.jpg", frame)
+        print(">>Store Complete")
+
+    if time.time() - start_time > 30:
+        break
+
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+    time.sleep(2)
+webcam.release()
+cv2.destroyAllWindows()
+
+
+

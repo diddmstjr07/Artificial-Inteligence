@@ -208,12 +208,24 @@ def run(
 
                     if confidence > 0.8:
                         print(confidence)
-                        x1, y1, x2, y2 = map(int, xyxy)
+                        x1, y1, x2, y2 = map(int, xyxy) # maping은 데이터를 자신의 위치로 복사하며 다른 데이터 유형으로 전환함을 뜻ㅇ한다.
                         print(f"{x1, y1}, {x2, y1}, {x2, y2}, {x1, y2}")
-                        image_pos_x = 960 - (x1 + x2) / 2
-                        image_pos_y = 540 + (y1 + y2) / 2
-                        print(f"image_position = ({image_pos_x}, {image_pos_y})")
-                        position_data.append(f"({image_pos_x}, {image_pos_y})")
+                        x_middle = (x1 + x2) / 2
+                        y_middle = (y1 + y2) / 2
+                        x_middle_cal = x_middle - 960
+                        y_middle_cal = y_middle - 540
+                        if x_middle < 960 and y_middle > 540:
+                            print(f"image_position = ({-x_middle_cal}, {y_middle_cal})")
+                            position_data.append(f"({-x_middle_cal}, {y_middle_cal})")
+                        elif x_middle > 960 and y_middle > 540:
+                            print(f"image_position = ({x_middle_cal}, {y_middle_cal})")
+                            position_data.append(f"({x_middle_cal}, {y_middle_cal})")
+                        elif x_middle > 960 and y_middle < 540:
+                            print(f"image_position = ({x_middle_cal}, {-y_middle_cal})")
+                            position_data.append(f"({x_middle_cal}, {-y_middle_cal})")
+                        else:
+                            print(f"image_position = ({-x_middle_cal}, {-y_middle_cal})")
+                            position_data.append(f"({-x_middle_cal}, {-y_middle_cal})")
                         cv2.imwrite(f"/Users/user/Desktop/Folder/yolov5-master/Directory_final/{p.stem}_{confidence}.jpg", im0)
                         photo_root_data.append(f"{p.stem}_{confidence}.jpg")
                         print(f'{p.stem}_{confidence}.jpg >> store complete')
@@ -280,9 +292,8 @@ def run(
         'Log_time': nowtime_data,
         'confidence': confidence_data
     })
-    now = datetime.now()
-    now0 = now.strftime('%Y-%m-%d %H:%M:%S')
-    df.to_csv(f'Result_{now0}.csv', index=True)
+    os.remove("Result.csv")
+    df.to_csv('Result.csv', index=True)
     print("Completed uploading CSV file")
 
     # Print results
