@@ -51,7 +51,7 @@ with os.scandir(path) as entries:
         if m:
             delete_form = m.string
             shutil.rmtree(f"{path_main}{delete_form}")
-            print(">> Delete complete")
+            print(">> Deleting existing directory complete")
         else:
             continue
 
@@ -226,6 +226,12 @@ def run(
                         else:
                             print(f"image_position = ({-x_middle_cal}, {-y_middle_cal})")
                             position_data.append(f"({-x_middle_cal}, {-y_middle_cal})")
+
+                        confstorelink = '/Users/user/Desktop/Folder/yolov5-master/Directory_final'
+
+                        shutil.rmtree(confstorelink)
+                        os.mkdir(confstorelink)
+
                         cv2.imwrite(f"/Users/user/Desktop/Folder/yolov5-master/Directory_final/{p.stem}_{confidence}.jpg", im0)
                         photo_root_data.append(f"{p.stem}_{confidence}.jpg")
                         print(f'{p.stem}_{confidence}.jpg >> store complete')

@@ -1,8 +1,8 @@
 import csv
 import requests
 
-image_url = 'http://182.211.172.137:8000/photo'
-url = "http://127.0.0.1:8000/upload/garbage"
+image_url = 'http://182.211.172.137:8000/photo/get'
+url = "http://182.211.172.137:8000/garbage/upload"
 
 f = open("Result.csv", 'r')
 datas = csv.reader(f)
@@ -20,12 +20,13 @@ for data in datas:
     image_uuid = response.json()['filename']
 
     datas = {
-        'lat': f'35.1246187{i}',
-        'lng': f'126.908036{i}',
+        'lat': f'35.11959{i}',
+        'lng': f'126.91257{i}',
         'datetime': data[3],
         'object': 'Garbage',
         'conf': data[4],
         'img': image_uuid,
+        'com': 'N'
     }
 
     responses = requests.post(url, json=datas)
