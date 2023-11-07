@@ -20,8 +20,8 @@ for data in datas:
     image_uuid = response.json()['filename']
 
     datas = {
-        'lat': f'35.11959{i}',
-        'lng': f'126.91257{i}',
+        'lat': f'{data[1]}',
+        'lng': f'{data[2]}',
         'datetime': data[3],
         'object': 'Garbage',
         'conf': data[4],
