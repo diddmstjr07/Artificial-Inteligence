@@ -23,10 +23,8 @@ for data in datas:
         'lat': f'{data[1]}',
         'lng': f'{data[2]}',
         'datetime': data[3],
-        'object': 'Garbage',
-        'conf': data[4],
-        'img': image_uuid,
-        'com': 'N'
+ls
+    'com': 'N'
     }
 
     responses = requests.post(url, json=datas)
