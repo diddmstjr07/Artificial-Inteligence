@@ -10,11 +10,10 @@ datas = csv.reader(f)
 i = 0
 
 for data in datas:
-    i = i + 1
     if data[0] == "":
         continue
 
-    with open(f"Directory_final/{data[2]}", 'rb') as file:
+    with open(f"Directory_final/{data[3]}", 'rb') as file:
         response = requests.post(image_url, files={'file': (file.name, file)})
 
     image_uuid = response.json()['filename']
@@ -22,9 +21,11 @@ for data in datas:
     datas = {
         'lat': f'{data[1]}',
         'lng': f'{data[2]}',
-        'datetime': data[3],
-ls
-    'com': 'N'
+        'datetime': data[4],
+        'object': 'Garbage',
+        'conf': data[5],
+        'image': image_uuid,
+        'com': 'N'
     }
 
     responses = requests.post(url, json=datas)
